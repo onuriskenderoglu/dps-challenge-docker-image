@@ -17,6 +17,8 @@ class Prediction(BaseModel):
 
 @app.post("/predict")
 async def predict(payload: Date):
+    # The numbers are one-hot encodings of categorical data. In order: alkoholunfälle, fluchtunfälle, verkehrsunfälle,
+    # verletzte und getötete, insgesamt, mit Personenschäden
     full_row = [payload.year, payload.month, 1, 0, 0, 0, 1, 0]
     with open('final_model.pkl', 'rb') as f:
         model = pickle.load(f)
